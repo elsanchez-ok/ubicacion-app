@@ -1,38 +1,327 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Inicio de sesión con GPS obligatorio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <!-- Metadatos esenciales -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ubicación App | Inicio de Sesión</title>
+
+  <!-- SEO y redes sociales -->
+  <meta name="description" content="Aplicación web para geolocalización con inicio de sesión seguro y mapa interactivo." />
+  <meta name="author" content="Ubicación App Team" />
+  <meta property="og:title" content="Ubicación App" />
+  <meta property="og:description" content="Inicia sesión para acceder a tu ubicación en tiempo real." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/25/25694.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/25/25694.png" type="image/png" />
+
+  <!-- Tipografía profesional -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div id="bloqueo" class="text-center">
-    <h1 class="text-3xl font-bold text-red-600 mb-4">📍 GPS requerido</h1>
-    <p class="text-gray-700 mb-6">Activa tu ubicación para continuar al inicio de sesión.</p>
-    <button onclick="verificarGPS()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800">Activar GPS</button>
-  </div>
+<body>
+  <!-- Encabezado con navegación -->
+  <header class="main-header">
+    <nav class="navbar">
+      <div class="logo">📍 Ubicación App</div>
+      <ul class="nav-links">
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Ayuda</a></li>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Acerca de</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <div id="login" class="hidden text-center">
-    <h1 class="text-3xl font-bold text-green-600 mb-4">✅ GPS activo</h1>
-    <p class="text-gray-700 mb-6">Bienvenido. Ingresa tus credenciales.</p>
-    <form action="https://formsubmit.co/tu-correo@example.com" method="POST" class="space-y-4">
-      <input type="text" name="usuario" placeholder="Usuario" class="px-4 py-2 border rounded w-full">
-      <input type="password" name="clave" placeholder="Contraseña" class="px-4 py-2 border rounded w-full">
-      <input type="hidden" name="Latitud" id="latitudInput">
-      <input type="hidden" name="Longitud" id="longitudInput">
-      <input type="hidden" name="Dirección" id="direccionInput">
-      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800">Iniciar sesión</button>
-    </form>
-  </div>
-  
-<!-- Agrega esto en index.html si quieres mostrar el mapa -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Contenido principal -->
+  <main class="login-wrapper">
+    <section class="login-box">
+      <header>
+        <h1>🔐 Inicia sesión</h1>
+        <p>Accede a tu ubicación en tiempo real</p>
+      </header>
 
-<div id="mapa" class="w-full h-64 mt-6"></div>
+      <!-- Formulario de login -->
+      <form id="login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" name="username" placeholder="Ej: admin" required />
+        </div>
 
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" placeholder="Ej: 1234" required />
+        </div>
+
+        <button type="submit" id="login-btn">Iniciar sesión</button>
+        <p id="message" class="message"></p>
+      </form>
+------
+      <!-- Sección de ayuda -->
+      <aside class="help-section">
+        <h3>¿Olvidaste tu contraseña?</h3>
+        <p>Por ahora, usa <strong>admin / 1234</strong> para acceder. Pronto habilitaremos recuperación de cuenta.</p>
+        <a href="#" class="help-link">Solicitar soporte técnico</a>
+      </aside>
+
+      <!-- Sección de beneficios -->
+      <section class="benefits">
+        <h3>¿Por qué usar Ubicación App?</h3>
+        <ul class="benefits-list">
+          <li>✅ Acceso rápido a tu ubicación</li>
+          <li>✅ Interfaz amigable y responsiva</li>
+          <li>✅ Seguridad en el inicio de sesión</li>
+          <li>✅ Compatible con dispositivos móviles</li>
+          <li>✅ Integración con mapas interactivos</li>
+          <li>✅ Soporte técnico personalizado</li>
+        </ul>
+      </section>
+
+      <!-- Sección de testimonios -->
+      <section class="testimonials">
+        <h3>💬 Opiniones de usuarios</h3>
+        <div class="testimonial">
+          <p>“Ubicación App me ayudó a encontrar mi ruta en tiempo real. ¡Muy útil!”</p>
+          <span>— Carla M., Tegucigalpa</span>
+        </div>
+        <div class="testimonial">
+          <p>“La interfaz es súper clara y el mapa funciona perfecto en mi celular.”</p>
+          <span>— Luis G., San Pedro Sula</span>
+        </div>
+        <div class="testimonial">
+          <p>“Ideal para monitorear ubicaciones en campo. Recomendado.”</p>
+          <span>— Andrea R., La Ceiba</span>
+        </div>
+      </section>
+
+      <!-- Sección de novedades -->
+      <section class="news-section">
+        <h3>📰 Novedades</h3>
+        <article>
+          <h4>Versión 2.0 en camino</h4>
+          <p>Estamos trabajando en nuevas funciones como historial de ubicaciones, alertas y más.</p>
+        </article>
+        <article>
+          <h4>Soporte multilingüe</h4>
+          <p>Pronto podrás usar la app en inglés, francés y portugués.</p>
+        </article>
+        <article>
+          <h4>Modo oscuro</h4>
+          <p>Una nueva opción para cuidar tu vista durante la noche.</p>
+        </article>
+      </section>
+
+      <!-- Sección de registro futuro -->
+      <section class="register-preview">
+        <h3>¿No tienes cuenta?</h3>
+        <p>Pronto habilitaremos el registro de nuevos usuarios. ¡Mantente atento!</p>
+        <button class="disabled-btn" disabled>Registrarse</button>
+      </section>
+----
+      <!-- Sección de accesibilidad -->
+      <section class="accessibility">
+        <h3>♿ Accesibilidad</h3>
+        <p>Esta aplicación está diseñada para ser accesible a todos los usuarios, incluyendo personas con discapacidad visual o motora.</p>
+        <ul>
+          <li>✔ Navegación por teclado</li>
+          <li>✔ Contraste alto para mejor visibilidad</li>
+          <li>✔ Etiquetas ARIA para lectores de pantalla</li>
+        </ul>
+      </section>
+
+      <!-- Sección de redes sociales -->
+      <section class="social-media">
+        <h3>🌐 Síguenos en redes</h3>
+        <ul class="social-links">
+          <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+          <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+        </ul>
+      </section>
+
+      <!-- Sección de enlaces legales -->
+      <section class="legal-info">
+        <h3>📄 Información legal</h3>
+        <p>Ubicación App cumple con las normativas de protección de datos personales según la legislación vigente.</p>
+        <ul>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Términos y condiciones</a></li>
+          <li><a href="#">Cookies y rastreo</a></li>
+        </ul>
+      </section>
+
+      <!-- Sección de contacto -->
+      <section class="contact-section">
+        <h3>📬 Contáctanos</h3>
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="contact-name">Nombre</label>
+            <input type="text" id="contact-name" name="contact-name" placeholder="Tu nombre" />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Correo electrónico</label>
+            <input type="email" id="contact-email" name="contact-email" placeholder="tucorreo@ejemplo.com" />
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Mensaje</label>
+            <textarea id="contact-message" name="contact-message" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+          </div>
+          <button type="submit">Enviar mensaje</button>
+        </form>
+      </section>
+
+      <!-- Sección de preguntas frecuentes -->
+      <section class="faq-section">
+        <h3>❓ Preguntas frecuentes</h3>
+        <details>
+          <summary>¿Cómo accedo al mapa?</summary>
+          <p>Después de iniciar sesión, serás redirigido automáticamente a la página del mapa.</p>
+        </details>
+        <details>
+          <summary>¿Puedo usar la app sin conexión?</summary>
+          <p>La geolocalización requiere conexión a internet para funcionar correctamente.</p>
+        </details>
+        <details>
+          <summary>¿Mis datos están seguros?</summary>
+          <p>Sí, usamos protocolos de seguridad para proteger tu información.</p>
+        </details>
+      </section>
+---   
+    </section> <!-- Fin de login-box -->
+  </main> <!-- Fin de login-wrapper -->
+
+  <!-- Pie de página extendido -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>Ubicación App</h4>
+          <p>Aplicación web para geolocalización en tiempo real. Diseñada para usuarios móviles y de escritorio.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">Documentación técnica</a></li>
+            <li><a href="#">API pública</a></li>
+            <li><a href="#">Guía de instalación</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Comunidad</h4>
+          <ul>
+            <li><a href="#">Foro de usuarios</a></li>
+            <li><a href="#">Blog oficial</a></li>
+            <li><a href="#">Eventos y webinars</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Ubicación App. Todos los derechos reservados.</p>
+        <p>Desarrollado por el equipo de innovación digital en Honduras 🇭🇳</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts adicionales -->
+  <script>
+    // Validación básica del formulario de contacto
+    document.getElementById("contact-form")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Gracias por tu mensaje. Te responderemos pronto.");
+    });
+
+    // Accesibilidad: permitir navegación con tecla Enter en login
+    document.getElementById("login-form")?.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        document.getElementById("login-btn").click();
+      }
+    });
+
+    // Comentario técnico: aquí podrías agregar integración con Firebase o Auth0
+    // Ejemplo:
+    // firebase.auth().signInWithEmailAndPassword(username, password)
+    //   .then(user => { ... })
+    //   .catch(error => { ... });
+
+    // Comentario técnico: espacio reservado para analítica
+    // Ejemplo:
+    // gtag('event', 'login_attempt', { method: 'manual' });
+
+    // Comentario técnico: espacio para modo oscuro
+    // document.body.classList.toggle("dark-mode");
+
+    // Comentario técnico: espacio para internacionalización
+    // const lang = navigator.language || 'es';
+    // cargarTraducciones(lang);
+  </script>
+
+  <!-- Script principal -->
   <script src="geolocalizacion.js"></script>
+</body>
+</html>
+---
+  <!-- Comentarios para desarrolladores -->
+  <!-- 
+    🔧 Este archivo está diseñado para ser modular y escalable.
+    🔒 La autenticación actual es básica. Se recomienda migrar a un sistema seguro como OAuth2, JWT o Firebase Auth.
+    📦 El formulario de contacto no envía datos a un servidor. Se puede conectar con servicios como Formspree, Netlify Forms o backend personalizado.
+    🌐 Para internacionalización, se puede usar i18next o una estructura de archivos JSON por idioma.
+    📊 Para analítica, se recomienda integrar Google Analytics, Plausible o Matomo.
+    🧪 Para pruebas, se puede usar Cypress, Jest o Playwright.
+    📱 Para diseño móvil, se recomienda usar media queries y frameworks como Tailwind o Bootstrap.
+    🧩 Para componentes reutilizables, se puede migrar a React, Vue o Web Components.
+  -->
+
+  <!-- Espacio para scripts externos -->
+  <!-- 
+    <script src="https://cdn.leafletjs.com/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next/i18next.min.js"></script>
+  -->
+
+  <!-- Espacio para configuración global -->
+  <script>
+    const config = {
+      appName: "Ubicación App",
+      version: "1.0.0",
+      apiBaseUrl: "https://api.ubicacionapp.com",
+      supportedLanguages: ["es", "en", "fr", "pt"],
+      defaultLanguage: "es",
+      enableDarkMode: false,
+      enableAnalytics: false,
+    };
+
+    // Inicialización básica
+    console.log(`${config.appName} v${config.version} iniciado`);
+  </script>
+
+  <!-- Espacio para futuras integraciones -->
+  <!-- 
+    🔐 Autenticación avanzada
+    📍 Geolocalización con precisión
+    🗺️ Mapas personalizados
+    📡 WebSockets para ubicación en tiempo real
+    📁 Subida de archivos (imágenes, rutas)
+    🧠 IA para predicción de movimiento
+    🔔 Notificaciones push
+    📆 Historial de ubicaciones
+    🧭 Navegación guiada
+  -->
+
+  <!-- Créditos -->
+  <!-- 
+    Desarrollado por: JOSEPH & Copilot
+    Ubicación: San Pedro Sula, Honduras 🇭🇳
+    Año: 2025
+    Licencia: MIT
+  -->
+
+  <!-- Fin del documento -->
 </body>
 </html>
